@@ -10,6 +10,10 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+#importing all of the table shapes from models
+from project_afia.models import Base
+from project_afia.models import User
+
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -19,6 +23,9 @@ engine = create_engine(DATABASE_URL)
 
 #session maker
 SessionLocal = sessionmaker(bind=engine)
+
+#creaating sql of all the shapes
+Base.metadata.create_all(bind=engine)
 
 def get_db():
     #instace of session
@@ -34,3 +41,4 @@ def get_db():
 #db instnace is a phone call
 #yield handing off the pone\
 #getting the phone and hanguing up despite what ever happen 
+
